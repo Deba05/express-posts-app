@@ -104,10 +104,13 @@ app.delete("/posts/:id",(req,res)=>{
 })
 
 
- let port=8080;
+ let port = process.env.PORT || 8080;
  app.listen(port,()=>{
     console.log(`app listening on port ${port}`);
 
+ });
+ app.get("/", (req, res) => {
+   res.redirect("/posts"); // Or render a homepage if you have one
  });
 
 
