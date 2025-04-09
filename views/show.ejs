@@ -1,0 +1,129 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <p>Post id: <%= post.id %> </p>
+    <div class="post">
+        <h3 class="username">Username: <%= post.username%></h3>
+        <h3 class="content"> Content: <%= post.content %></h3>
+    </div>
+
+    <br>
+    <a href="/posts">Back to Posts</a>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Background Animation */
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Effect */
+        .post-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Dark Mode */
+        .dark body {
+            background: linear-gradient(135deg, #111827, #1f2937);
+        }
+
+        .dark .post-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark h1, .dark h3, .dark p, .dark a {
+            color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="text-white p-6 min-h-screen flex flex-col items-center transition-colors duration-300">
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle" class="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hover:bg-gray-700 transition">
+        🌙 Dark Mode
+    </button>
+
+    <div class="post-container max-w-lg w-full p-6 rounded-lg mt-10">
+        <h1 class="text-3xl font-bold text-center mb-4">Post Details</h1>
+        
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold">👤 Username:</h3>
+            <p class="text-gray-200"><%= post.username %></p>
+
+            <h3 class="text-lg font-semibold mt-4">📝 Content:</h3>
+            <p class="text-gray-300"><%= post.content %></p>
+
+            <% if (post.image) { %>
+                <div class="mt-4 flex justify-center">
+                    <img src="<%= post.image %>" alt="Post Image" class="w-full rounded-lg shadow-lg opacity-0 transition-opacity duration-700" onload="this.style.opacity=1;">
+                </div>
+            <% } %>
+        </div>
+
+        <div class="text-center mt-6">
+            <a href="/posts" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105">
+                ⬅ Back to Posts
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Logic
+        const toggleButton = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+            body.classList.add("dark");
+            toggleButton.textContent = "☀️ Light Mode";
+        }
+
+        toggleButton.addEventListener("click", () => {
+            body.classList.toggle("dark");
+
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("darkMode", "enabled");
+                toggleButton.textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+                toggleButton.textContent = "🌙 Dark Mode";
+            }
+        });
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,136 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Post</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Create a New Post</h1>
+    <form action="/posts" method="POST" enctype="multipart/form-data">
+        <label for="username">Username:</label>
+        <input class="username" type="text" name="username" placeholder="username" required>
+        <br/>
+        </br>
+        <label for="content">Content:</label>
+        <textarea class="content" name="content" placeholder="content" required></textarea>
+        <br/>
+        <p>Post Image :</p>
+        
+        <input type="file" name="image" accept="image/*">
+        </br>
+        <button type="submit">Submit</button>
+        </br>
+    </form>
+    <br/>
+    <a href="/posts">Back to Posts</a>
+</body>
+</html>  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Post</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Background Animation */
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Form */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Mode Support */
+        .dark body {
+            background: linear-gradient(135deg, #111827, #1f2937);
+        }
+
+        .dark .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark h1, .dark p, .dark a, .dark label {
+            color: #f3f4f6;
+        }
+
+        /* Input Focus Effect */
+        input, textarea {
+            transition: 0.3s ease;
+        }
+        input:focus, textarea:focus {
+            border: 2px solid #4f46e5;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="text-white p-6 min-h-screen flex flex-col items-center transition-colors duration-300">
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle" class="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hover:bg-gray-700 transition">
+        🌙 Dark Mode
+    </button>
+
+    <div class="form-container max-w-lg w-full p-6 rounded-lg">
+        <h1 class="text-3xl font-bold text-center mb-6">Create a New Post</h1>
+        <form action="/posts" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <input class="w-full p-3 bg-transparent border border-gray-300 rounded-lg focus:outline-none text-white placeholder-gray-300" 
+                type="text" name="username" placeholder="Username" required>
+
+            <textarea class="w-full p-3 bg-transparent border border-gray-300 rounded-lg focus:outline-none text-white placeholder-gray-300 h-32" 
+                name="content" placeholder="Write your post..." required></textarea>
+
+            <div class="flex flex-col items-center">
+                <p class="text-gray-200 mb-2">Upload an Image:</p>
+                <input type="file" name="image" accept="image/*" class="text-gray-200">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition">
+                Submit Post
+            </button>
+        </form>
+        <div class="text-center mt-4">
+            <a href="/posts" class="text-gray-300 hover:underline">⬅ Back to Posts</a>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        const toggleButton = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+            body.classList.add("dark");
+            toggleButton.textContent = "☀️ Light Mode";
+        }
+
+        toggleButton.addEventListener("click", () => {
+            body.classList.toggle("dark");
+
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("darkMode", "enabled");
+                toggleButton.textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+                toggleButton.textContent = "🌙 Dark Mode";
+            }
+        });
+    </script>
+</body>
+</html>
+

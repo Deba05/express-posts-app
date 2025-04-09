@@ -1,0 +1,26 @@
+h1{
+    color: maroon;
+}
+.header{
+    text-align: center;
+}
+.post{
+    background: blanchedalmond;
+
+}
+.username{
+    font-style: italic;
+}
+img {
+    width: 300px;
+    height: 200px;
+    object-fit: contain;
+    background-color: #BAB86C ;
+    display: block;
+     
+}
+
+
+
+
+

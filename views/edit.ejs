@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit </title>
+</head>
+<body>
+    <div>
+        <h2>Edit your Post</h2>
+        <p>Id:<%= post.id %></p>
+        <p> Username:<%= post.username %></p>
+        <form method="post" action="/posts/<%=post.id%>?_method=PATCH" method="POST">
+            <textarea name="content"><%= post.content %></textarea>
+            
+            <button>Submit </button>
+
+        </form>
+      
+        
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Background Animation */
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Effect */
+        .edit-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .edit-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Dark Mode */
+        .dark body {
+            background: linear-gradient(135deg, #111827, #1f2937);
+        }
+
+        .dark .edit-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark h1, .dark h3, .dark p, .dark a {
+            color: #f3f4f6;
+        }
+
+        /* Button & Input Styling */
+        .input-field {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    resize: none;
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    color: #ffcc00; /* Yellow text */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+        .btn {
+            background-color: #4F46E5;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-white p-6 min-h-screen flex flex-col items-center transition-colors duration-300">
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle" class="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hover:bg-gray-700 transition">
+        🌙 Dark Mode
+    </button>
+
+    <div class="edit-container max-w-lg w-full p-6 rounded-lg mt-10">
+        <h1 class="text-3xl font-bold text-center mb-4">Edit Your Post</h1>
+        
+        <p class="text-gray-300 text-center">👤 Username: <%= post.username %></p>
+
+        <form method="post" action="/posts/<%=post.id%>?_method=PATCH">
+            <label class="block mt-4 text-lg font-semibold">✍ Edit Content:</label>
+            <textarea name="content" class="input-field" rows="4" required><%- post.content %></textarea>
+
+            <div class="text-center mt-4">
+                <button class="btn">✅ Update Post</button>
+            </div>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="/posts" class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105">
+                ⬅ Cancel
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Logic
+        const toggleButton = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+            body.classList.add("dark");
+            toggleButton.textContent = "☀️ Light Mode";
+        }
+
+        toggleButton.addEventListener("click", () => {
+            body.classList.toggle("dark");
+
+            if (body.classList.contains("dark")) {
+                localStorage.setItem("darkMode", "enabled");
+                toggleButton.textContent = "☀️ Light Mode";
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+                toggleButton.textContent = "🌙 Dark Mode";
+            }
+        });
+    </script>
+</body>
+</html>
+
