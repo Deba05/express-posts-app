@@ -110,8 +110,8 @@ app.delete("/posts/:id",(req,res)=>{
 
  });
  app.get("/", (req, res) => {
-   res.redirect("/posts"); // Or render a homepage if you have one
- });
+  res.redirect("/posts"); // Or render a homepage if you have one
+});
 
 
 
